@@ -12,9 +12,9 @@ function App() {
     <div className="App">
       <Nav />
       <Switch>
-        <Route path="/login" render={props => <LoginPage {...props} />} />
+        <Route path="/login" render={props => <LoginPage />} />
         <Route path="/book/:id" render={props => <BookPage {...props} />} />
-        <Route path="/signup" render={props => <SignupPage {...props} />} />
+        <Route path="/signup" render={props => <SignupPage />} />
         <Route path="/" render={props => <HomePage {...props} />} />
       </Switch>
     </div>
