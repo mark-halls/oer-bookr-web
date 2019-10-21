@@ -1,5 +1,18 @@
 
-import { GET_BOOKS_START, GET_BOOKS_FAILURE, GET_BOOKS_SUCCESS, ADD_BOOK_START, ADD_BOOK_SUCCESS, ADD_BOOK_FAILURE, UPDATE_BOOK_START, UPDATE_BOOK_SUCCESS, UPDATE_BOOK_FAILURE, DELETE_BOOK_START, DELETE_BOOK_SUCCESS, DELETE_BOOK_FAILURE } from '../Actions/booksActions'
+import {
+  GET_BOOKS_START,
+  GET_BOOKS_FAILURE,
+  GET_BOOKS_SUCCESS,
+  ADD_BOOK_START,
+  ADD_BOOK_SUCCESS,
+  ADD_BOOK_FAILURE,
+  UPDATE_BOOK_START,
+  UPDATE_BOOK_SUCCESS,
+  UPDATE_BOOK_FAILURE,
+  DELETE_BOOK_START,
+  DELETE_BOOK_SUCCESS,
+  DELETE_BOOK_FAILURE
+} from '../Actions/booksActions'
 
 const initialState = {
   books: [],
@@ -38,7 +51,7 @@ export default (state = initialState, action) => {
     case DELETE_BOOK_SUCCESS:
       return { ...state, isDeletingBook: false }
     case DELETE_BOOK_FAILURE:
-
+      return { ...state, isDeletingBook: false, error: action.payload }
     default:
       return state
   }
