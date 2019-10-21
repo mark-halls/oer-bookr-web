@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import { awaitExpression } from '@babel/types'
 
 const BASE_URL = "https://samirlilienfeld-oer-bookr.herokuapp.com/"
 
@@ -20,4 +21,34 @@ const requestOptions = {
   headers: {
     authorization: token
   }
+}
+
+export const getReviews = () => dispatch => {
+  dispatch({ type: GET_REVIEWS_START })
+  Axios
+    .get(`${BASE_URL}/reviews/reviews/paging`, requestOptions)
+    .then(res => {
+      dispatch({ type: GET_REVIEWS_SUCCESS, payload: res.data })
+    })
+    .catch(err => dispatch({ type: GET_REVIEWS_FAILURE, payload: err }))
+}
+
+export const addReview = newReview => dispatch => {
+  dispatch({ type: ADD_REVIEW_START })
+  Axios
+    .post(`${BASE_URL}/review/book/${newReview.bookId}`, newReview)
+    .then(res => {
+      dispatch({ type: ADD_REVIEW_SUCCESS })
+    })
+    .catch(err => dispatch({ type: ADD_REVIEW_FAILURE, payload: err }))
+}
+
+export const deleteReview = id => dispatch => {
+  dispatch({ type: DELETE_REVIEW_START })
+  Axios
+    .delete(`${BASE_URL}/data/reviews/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_REVIEW_SUCCESS })
+    })
+    .catch(err => dispatch({ type: DELETE_REVIEW_FAILURE, payload: err }))
 }
