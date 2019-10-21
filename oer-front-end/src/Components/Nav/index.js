@@ -1,14 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Navbar, Nav, NavItem, NavLink } from "reactstrap";
 
-const Nav = () => {
+const NavBar = () => {
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/signup">Signup</NavLink>
-      <NavLink to="/login">Login</NavLink>
-    </nav>
+    <Navbar color="light" light expand="md">
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink to="/">Home</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/signup">Signup</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/login">Login</NavLink>
+        </NavItem>
+      </Nav>
+    </Navbar>
   );
 };
 
-export default Nav;
+export default NavBar;
