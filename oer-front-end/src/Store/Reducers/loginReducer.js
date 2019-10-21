@@ -1,4 +1,4 @@
-import { LOGIN_USER_START, LOGIN_USER_SUCCESS, LOGIN_USER_FAULURE } from "../Actions/LoginActions"
+import { LOGIN_USER_START, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE } from "../Actions/LoginActions"
 
 const initialState = {
     isLoggingIn: false,
@@ -15,7 +15,7 @@ export const loginReducer = (state = initialState, action) => {
   case LOGIN_USER_SUCCESS:
       return{...state, isLogging: false, isAuthenticated: true}
 
-  case LOGIN_USER_FAULURE: 
+  case LOGIN_USER_FAILURE: 
       return {...state, isLoggingIn: false, error: action.payload}
 
   default:
