@@ -1,27 +1,48 @@
 import React from "react";
+import { Form, Field, withFormik } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 
-class Login extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
+const Login = ({ values, touched, errors }) => {
+  return (
+    <Form>
+      <Field
+        type="text"
+        name="username"
+        placeholder="Username"
+        value={values.name}
+      />
+      {touched.username && errors.name && <p>{errors.name}</p>}
+      <Field
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={values.password}
+      />
+      {touched.password && errors.password && <p>{errors.password}</p>}
+      <button type="submit">Login</button>
+    </Form>
+  );
+};
 
-  constructor() {
-    super();
-  }
+const FormikLoginForm = withFormik({
+  mapPropsToValues({ username, password }) {
+    return {
+      username: username || "",
+      password: password || ""
+    };
+  },
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+  validationSchema: Yup.object().shape({
+    username: Yup.string().required("Username required"),
+    password: Yup.string().required("Password required")
+  }),
 
-  handleSubmit = e => {
+  handleSubmit(values) {
     axios
       .post(
         "https://samirlilienfeld-oer-bookr.herokuapp.com/login",
-        `grant_type=password&username=${this.state.username}&password=${this.state.password}`,
+        `grant_type=password&username=${values.username}&password=${values.password}`,
         {
           headers: {
             // btoa is converting our client id/client secret into base64
@@ -35,31 +56,7 @@ class Login extends React.Component {
         // this.props.history.push("/users");
       })
       .catch(err => console.dir(err));
-
-    e.preventDefault();
-  };
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          required
-        />
-        <button>Submit</button>
-      </form>
-    );
   }
-}
+})(Login);
 
-export default Login;
+export default FormikLoginForm;
