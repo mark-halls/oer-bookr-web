@@ -23,7 +23,7 @@ const initialState = {
   error: ''
 }
 
-export default (state = initialState, action) => {
+export const reviewsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_REVIEWS_START:
       return { ...state, isLoadingReviews: true, error: "" }

@@ -25,7 +25,7 @@ const initialState = {
 
 }
 
-export default (state = initialState, action) => {
+export const booksReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case GET_BOOKS_START:
