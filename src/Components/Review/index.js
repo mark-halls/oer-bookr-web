@@ -3,8 +3,8 @@ import React from "react";
 const Review = props => {
   return (
     <div>
-      <p>{props.reviewer}</p>
-      <p>{props.review}</p>
+      <p>User: {props.reviewer}</p>
+      <p>Review: {props.review}</p>
     </div>
   );
 };
