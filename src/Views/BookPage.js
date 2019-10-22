@@ -4,8 +4,17 @@ import Book from "../Components/Book";
 import Review from "../Components/Review";
 
 const BookPage = () => {
-  const reviews = [{}];
-  const book = {};
+  const reviews = [
+    { review: "Much math, wow!", reviewer: "Doge", reviewid: 1 }
+  ];
+  const book = {
+    author: "test",
+    bookid: 1,
+    license: "MIT",
+    publisher: "testing clearing house",
+    title: "Calc 1"
+  };
+
   return (
     <div>
       <Book {...book} />
