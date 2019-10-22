@@ -2,27 +2,36 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Book from "../Components/Book";
+import SearchForm from "../Components/SearchForm";
 
 const HomePage = () => {
   const [bookList, setBookList] = useState();
+  const [dataToDisplay, setDataToDisplay] = useState();
+
   useEffect(() => {
     axios
       .get("https://samirlilienfeld-oer-bookr.herokuapp.com/books/books")
       .then(res => {
         setBookList(res.data);
-        console.log(res.data);
       });
   }, []);
 
-  if (!bookList) {
+  useEffect(() => {
+    bookList && setDataToDisplay(bookList);
+  }, [bookList]);
+
+  if (!dataToDisplay) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {bookList.map(book => (
-        <Book {...book} key={book.bookid} />
-      ))}
+      <SearchForm data={bookList} setDataToDisplay={setDataToDisplay} />
+      <div>
+        {dataToDisplay.map(book => (
+          <Book {...book} key={book.bookid} />
+        ))}
+      </div>
     </div>
   );
 };
