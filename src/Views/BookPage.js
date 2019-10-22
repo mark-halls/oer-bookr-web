@@ -12,7 +12,8 @@ const BookPage = () => {
     bookid: 1,
     license: "MIT",
     publisher: "testing clearing house",
-    title: "Calc 1"
+    title: "Calc 1",
+    reviews: reviews.length
   };
 
   return (
