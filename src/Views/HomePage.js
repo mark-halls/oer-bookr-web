@@ -27,9 +27,11 @@ const HomePage = () => {
   return (
     <div>
       <SearchForm data={bookList} setDataToDisplay={setDataToDisplay} />
-      {dataToDisplay.map(book => (
-        <Book {...book} key={book.bookid} />
-      ))}
+      <div>
+        {dataToDisplay.map(book => (
+          <Book {...book} key={book.bookid} />
+        ))}
+      </div>
     </div>
   );
 };
