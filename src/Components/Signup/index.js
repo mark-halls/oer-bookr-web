@@ -1,9 +1,8 @@
 import React from "react";
-import { connect } from 'react-redux'
-import { registerUser } from '../../Store/Actions'
+import { connect } from "react-redux";
+import { registerUser } from "../../Store/Actions";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-
 
 const Signup = ({ values, touched, errors }) => {
   return (
@@ -47,13 +46,14 @@ const Signup = ({ values, touched, errors }) => {
 
 const mapDispatchToProps = {
   registerUser
-}
+};
 
 const FormikSignupForm = withFormik({
-  mapPropsToValues({ username, password, confirm }) {
+  mapPropsToValues({ username, password, confirm, email }) {
     return {
       username: username || "",
       password: password || "",
+      email: email || "",
       confirm: confirm || ""
     };
   },
@@ -73,11 +73,11 @@ const FormikSignupForm = withFormik({
   handleSubmit(values, { props }) {
     const credentials = {
       username: values.username,
-      password: values.password
-    }
-    props.registerUser(credentials)
+      password: values.password,
+      primaryemail: values.email
+    };
+    props.registerUser(credentials);
   }
-
 })(Signup);
 
 export default connect(
