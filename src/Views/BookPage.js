@@ -7,7 +7,6 @@ import axios from "axios";
 
 const BookPage = props => {
   const [book, setBook] = useState();
-  const [reviews, setReviews] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -18,32 +17,14 @@ const BookPage = props => {
       });
   }, [id]);
 
-  useEffect(() => {
-    if (book) {
-      async function fetchReviews() {
-        const reviewsArray = await Promise.all(
-          book.reviews.map(async review => {
-            const response = await axios.get(
-              `https://samirlilienfeld-oer-bookr.herokuapp.com/reviews/review/${review}`
-            );
-            return response.data;
-          })
-        );
-        setReviews(reviewsArray);
-      }
-
-      fetchReviews(book.reviews);
-    }
-  }, [book]);
-
   return (
     <div>
       {book && <Book {...book} {...props} />}
       <div>
         <button>Write a review</button>
       </div>
-      {reviews.length > 0 ? (
-        reviews.map(review => <Review {...review} key={review.reviewid} />)
+      {book && book.reviews.length > 0 ? (
+        book.reviews.map(review => <Review {...review} key={review.reviewid} />)
       ) : (
         <p>No reviews</p>
       )}
