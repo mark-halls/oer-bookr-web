@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { connect } from 'react-redux'
+import { loginUser } from '../../Store/Actions'
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+
 
 const Login = ({ values, touched, errors }) => {
   return (
@@ -25,6 +29,13 @@ const Login = ({ values, touched, errors }) => {
   );
 };
 
+
+
+const mapDispatchToProps = {
+  loginUser
+}
+
+
 const FormikLoginForm = withFormik({
   mapPropsToValues({ username, password }) {
     return {
@@ -37,26 +48,16 @@ const FormikLoginForm = withFormik({
     username: Yup.string().required("Username required"),
     password: Yup.string().required("Password required")
   }),
-
-  handleSubmit(values) {
-    axios
-      .post(
-        "https://samirlilienfeld-oer-bookr.herokuapp.com/login",
-        `grant_type=password&username=${values.username}&password=${values.password}`,
-        {
-          headers: {
-            // btoa is converting our client id/client secret into base64
-            Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-            "Content-Type": "application/x-www-form-urlencoded"
-          }
-        }
-      )
-      .then(res => {
-        localStorage.setItem("token", res.data.access_token);
-        // this.props.history.push("/users");
-      })
-      .catch(err => console.dir(err));
+  handleSubmit(values, { props }) {
+    const credentials = {
+      username: values.username,
+      password: values.password
+    }
+    props.loginUser(credentials)
   }
 })(Login);
 
-export default FormikLoginForm;
+export default connect(
+  null,
+  mapDispatchToProps
+)(FormikLoginForm);

@@ -15,6 +15,7 @@ export const loginUser = loginInput => dispatch => {
 			localStorage.setItem("token", res.data.access_token)
 		})
 		.catch(err => {
-			dispatch({ type: LOGIN_USER_FAILURE, payload: err })
+			console.log(err)
+			dispatch({ type: LOGIN_USER_FAILURE, payload: err.response })
 		})
 }
