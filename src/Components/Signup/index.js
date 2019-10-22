@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { registerUser } from '../../Store/Actions'
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+
 
 const Signup = ({ values, touched, errors }) => {
   return (
@@ -43,6 +45,10 @@ const Signup = ({ values, touched, errors }) => {
   );
 };
 
+const mapDispatchToProps = {
+  registerUser
+}
+
 const FormikSignupForm = withFormik({
   mapPropsToValues({ username, password, confirm }) {
     return {
@@ -64,15 +70,17 @@ const FormikSignupForm = withFormik({
     )
   }),
 
-  handleSubmit({ username, email, password }) {
-    axios
-      .post("https://samirlilienfeld-oer-bookr.herokuapp.com/users/user", {
-        username: username,
-        primaryemail: email,
-        password: password
-      })
-      .then(res => console.log(res));
+  handleSubmit(values, { props }) {
+    const credentials = {
+      username: values.username,
+      password: values.password
+    }
+    props.registerUser(credentials)
   }
+
 })(Signup);
 
-export default FormikSignupForm;
+export default connect(
+  null,
+  mapDispatchToProps
+)(FormikSignupForm);

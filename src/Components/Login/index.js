@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { connect } from 'react-redux'
 import { loginUser } from '../../Store/Actions'
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 
 
 const Login = ({ values, touched, errors }) => {
