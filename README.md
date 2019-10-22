@@ -1,3 +1,3 @@
 # OER Bookr
 
-Deployed on [Zeit](https://front-end.oerbookr.now.sh/)
+Deployed on [netlify](https://cocky-elion-e6af99.netlify.com/)
