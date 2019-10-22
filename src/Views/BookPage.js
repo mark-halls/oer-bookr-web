@@ -1,6 +1,7 @@
 import React from "react";
 
 import Book from "../Components/Book";
+import Review from "../Components/Review";
 
 const BookPage = () => {
   const reviews = [{}];
@@ -9,7 +10,7 @@ const BookPage = () => {
     <div>
       <Book {...book} />
       {reviews.map(review => (
-        <Review {...review} />
+        <Review {...review} key={review.reviewid} />
       ))}
     </div>
   );
