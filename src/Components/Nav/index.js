@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 
-const NavBar = () => {
+const NavBar = props => {
+  const [loggedIn, setLoggedIn] = useState();
+
+  useEffect(() => {
+    setLoggedIn(props.token);
+  }, [props.token]);
+
   return (
     <Navbar color="light" light expand="md">
       <Nav className="ml-auto" navbar>
@@ -16,11 +22,19 @@ const NavBar = () => {
             Signup
           </NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink to="/login" className="nav-link" activeClassName="active">
-            Login
-          </NavLink>
-        </NavItem>
+        {loggedIn ? (
+          <NavItem>
+            <NavLink to="/logout" className="nav-link" activeClassName="active">
+              Logout
+            </NavLink>
+          </NavItem>
+        ) : (
+          <NavItem>
+            <NavLink to="/login" className="nav-link" activeClassName="active">
+              Login
+            </NavLink>
+          </NavItem>
+        )}
       </Nav>
     </Navbar>
   );

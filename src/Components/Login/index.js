@@ -38,7 +38,7 @@ const FormikLoginForm = withFormik({
     password: Yup.string().required("Password required")
   }),
 
-  handleSubmit(values) {
+  handleSubmit(values, { props }) {
     axios
       .post(
         "https://samirlilienfeld-oer-bookr.herokuapp.com/login",
@@ -54,7 +54,8 @@ const FormikLoginForm = withFormik({
       .then(res => {
         localStorage.setItem("token", res.data.access_token);
         localStorage.setItem("username", values.username);
-        // this.props.history.push("/users");
+        props.setLoginToken(true);
+        props.history.push("/");
       })
       .catch(err => console.dir(err));
   }
