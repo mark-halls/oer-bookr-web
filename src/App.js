@@ -9,7 +9,7 @@ import SignupPage from "./Views/SignupPage";
 import HomePage from "./Views/HomePage";
 
 function App() {
-  const [loginToken, setLoginToken] = useState();
+  const [loginToken, setLoginToken] = useState(localStorage.getItem("token"));
 
   return (
     <div className="App">
