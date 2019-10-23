@@ -17,7 +17,7 @@ const DeleteBook = props => {
   const closeModalDeleted = useCallback(() => {
     setShowModalDeleted(false);
     props.history.push("/");
-  }, []);
+  }, [props.history]);
 
   const sendDeleteToApi = useCallback(() => {
     axiosAuth()
@@ -30,7 +30,7 @@ const DeleteBook = props => {
         console.error(err);
         props.history.push("/login");
       });
-  }, []);
+  }, [closeModalConfirm, openModalDeleted, id, props.history]);
 
   if (!loggedIn) return <div></div>;
 

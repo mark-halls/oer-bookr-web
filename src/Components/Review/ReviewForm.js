@@ -36,15 +36,17 @@ const FormikReviewForm = withFormik({
   }),
 
   handleSubmit({ username, review }, { props }) {
-    console.log(props);
     axiosAuth()
       .post(`/review/book/${props.match.params.id}`, {
         reviewer: username,
         review: review
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
         props.setNewReview(!props.newReview);
+      })
+      .catch(err => {
+        console.error(err);
+        props.history.push("/login");
       });
   }
 })(ReviewForm);
