@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactModal from "react-modal";
 import axios from "axios";
 
 import Book from "../Components/Book";
 import Review from "../Components/Review";
 import ReviewForm from "../Components/Review/ReviewForm";
+import DeleteBook from "../Components/Book/DeleteBook";
+
+ReactModal.setAppElement("#root");
 
 const BookPage = props => {
   const [book, setBook] = useState();
   const [newReview, setNewReview] = useState();
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,6 +27,7 @@ const BookPage = props => {
   return (
     <div>
       {book && <Book {...book} {...props} />}
+      <DeleteBook {...props} />
       <div>
         <ReviewForm
           {...props}
@@ -32,7 +38,7 @@ const BookPage = props => {
       {book && book.reviews.length > 0 ? (
         book.reviews.map(review => <Review {...review} key={review.reviewid} />)
       ) : (
-        <p>No reviews</p>
+        <p></p>
       )}
     </div>
   );
