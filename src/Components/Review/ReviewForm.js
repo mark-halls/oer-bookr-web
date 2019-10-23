@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import axiosAuth from "../../utils/auth";
 
 const ReviewForm = ({ values, touched, errors }) => {
   if (!values.username) {
@@ -37,14 +37,11 @@ const FormikReviewForm = withFormik({
 
   handleSubmit({ username, review }, { props }) {
     console.log(props);
-    axios
-      .post(
-        `https://samirlilienfeld-oer-bookr.herokuapp.com/review/book/${props.match.params.id}`,
-        {
-          reviewer: username,
-          review: review
-        }
-      )
+    axiosAuth()
+      .post(`/review/book/${props.match.params.id}`, {
+        reviewer: username,
+        review: review
+      })
       .then(res => {
         console.log(res);
         props.setNewReview(!props.newReview);

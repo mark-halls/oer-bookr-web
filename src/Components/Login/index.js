@@ -52,9 +52,11 @@ const FormikLoginForm = withFormik({
         }
       )
       .then(res => {
+        console.log(res.data);
         localStorage.setItem("token", res.data.access_token);
         localStorage.setItem("username", values.username);
         props.setLoginToken(true);
+        props.history.push("/");
         props.history.push("/");
       })
       .catch(err => console.dir(err));

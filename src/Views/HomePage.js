@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
+import axiosAuth from "../utils/auth";
 
 import Book from "../Components/Book";
 import SearchForm from "../Components/SearchForm";
 
-const HomePage = () => {
+const HomePage = props => {
   const [bookList, setBookList] = useState();
   const [dataToDisplay, setDataToDisplay] = useState();
 
   useEffect(() => {
-    axios
-      .get("https://samirlilienfeld-oer-bookr.herokuapp.com/books/books")
+    axiosAuth()
+      .get("/books/books", {})
       .then(res => {
         setBookList(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+        props.history.push("/login");
       });
   }, []);
 

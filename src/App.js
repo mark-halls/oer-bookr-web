@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+
+import auth from "./utils/auth";
 
 import Nav from "./Components/Nav";
 import LoginPage from "./Views/LoginPage";
@@ -28,7 +30,7 @@ function App() {
           )}
         />
         <Route path="/book/:id" render={props => <BookPage {...props} />} />
-        <Route path="/signup" render={props => <SignupPage />} />
+        <Route path="/signup" render={props => <SignupPage {...props} />} />
         <Route path="/" render={props => <HomePage {...props} />} />
       </Switch>
     </div>
