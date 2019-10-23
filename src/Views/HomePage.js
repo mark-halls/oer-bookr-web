@@ -19,7 +19,7 @@ const HomePage = props => {
         console.error(err);
         props.history.push("/login");
       });
-  }, []);
+  }, [props.history]);
 
   useEffect(() => {
     bookList && setDataToDisplay(bookList);

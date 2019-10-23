@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-
-import auth from "./utils/auth";
 
 import Nav from "./Components/Nav";
 import LoginPage from "./Views/LoginPage";

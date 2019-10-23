@@ -27,7 +27,7 @@ const BookPage = props => {
         console.error(err);
         props.history.push("/login");
       });
-  }, [id, newReview]);
+  }, [id, newReview, props.history]);
 
   return (
     <div>
