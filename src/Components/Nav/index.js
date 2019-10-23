@@ -17,11 +17,7 @@ const NavBar = props => {
             Home
           </NavLink>
         </NavItem>
-        <NavItem>
-          <NavLink to="/signup" className="nav-link" activeClassName="active">
-            Signup
-          </NavLink>
-        </NavItem>
+
         {loggedIn ? (
           <NavItem>
             <NavLink to="/logout" className="nav-link" activeClassName="active">
@@ -29,11 +25,26 @@ const NavBar = props => {
             </NavLink>
           </NavItem>
         ) : (
-          <NavItem>
-            <NavLink to="/login" className="nav-link" activeClassName="active">
-              Login
-            </NavLink>
-          </NavItem>
+          <>
+            <NavItem>
+              <NavLink
+                to="/signup"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Signup
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                to="/login"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Login
+              </NavLink>
+            </NavItem>
+          </>
         )}
       </Nav>
     </Navbar>
