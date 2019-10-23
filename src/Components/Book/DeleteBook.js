@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import ReactModal from "react-modal";
-import axios from "axios";
+import axiosAuth from "../../utils/auth";
 
 const DeleteBook = props => {
   const { id } = useParams();
@@ -20,15 +20,16 @@ const DeleteBook = props => {
   }, []);
 
   const sendDeleteToApi = useCallback(() => {
-    axios
-      .delete(
-        `https://samirlilienfeld-oer-bookr.herokuapp.com/data/books/${id}`
-      )
+    axiosAuth()
+      .delete(`/data/books/${id}`)
       .then(() => {
         closeModalConfirm();
         openModalDeleted();
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        props.history.push("/login");
+      });
   }, []);
 
   if (!loggedIn) return <div></div>;

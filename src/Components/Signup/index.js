@@ -64,14 +64,15 @@ const FormikSignupForm = withFormik({
     )
   }),
 
-  handleSubmit({ username, email, password }) {
+  handleSubmit({ username, email, password }, { props }) {
     axios
       .post("https://samirlilienfeld-oer-bookr.herokuapp.com/users/user", {
         username: username,
         primaryemail: email,
         password: password
       })
-      .then(res => console.log(res));
+      .then(res => props.history.push("/login"))
+      .catch(err => console.error(err));
   }
 })(Signup);
 

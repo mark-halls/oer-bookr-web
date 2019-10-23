@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactModal from "react-modal";
-import axios from "axios";
+
+import axiosAuth from "../utils/auth";
 
 import Book from "../Components/Book";
 import Review from "../Components/Review";
@@ -17,10 +18,14 @@ const BookPage = props => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://samirlilienfeld-oer-bookr.herokuapp.com/books/book/${id}`)
+    axiosAuth()
+      .get(`/books/book/${id}`)
       .then(res => {
         setBook(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+        props.history.push("/login");
       });
   }, [id, newReview]);
 
