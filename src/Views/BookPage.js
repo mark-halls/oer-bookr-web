@@ -34,11 +34,14 @@ const BookPage = props => {
       {book && <Book {...book} {...props} />}
       <DeleteBook {...props} />
       <div>
-        <ReviewForm
-          {...props}
-          setNewReview={setNewReview}
-          newReview={newReview}
-        />
+        {book && (
+          <ReviewForm
+            {...props}
+            {...book}
+            setNewReview={setNewReview}
+            newReview={newReview}
+          />
+        )}
       </div>
       {book && book.reviews.length > 0 ? (
         book.reviews.map(review => <Review {...review} key={review.reviewid} />)

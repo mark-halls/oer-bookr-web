@@ -17,6 +17,7 @@ const HomePage = props => {
       })
       .catch(err => {
         console.error(err);
+        props.setLoginToken(false);
         props.history.push("/login");
       });
   }, [props.history]);

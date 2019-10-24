@@ -29,7 +29,12 @@ function App() {
         />
         <Route path="/book/:id" render={props => <BookPage {...props} />} />
         <Route path="/signup" render={props => <SignupPage {...props} />} />
-        <Route path="/" render={props => <HomePage {...props} />} />
+        <Route
+          path="/"
+          render={props => (
+            <HomePage {...props} setLoginToken={setLoginToken} />
+          )}
+        />
       </Switch>
     </div>
   );
