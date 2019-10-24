@@ -6,45 +6,51 @@ import ReactModal from "react-modal";
 import axiosAuth from "../../utils/auth";
 
 const ReviewForm = props => {
-  console.log(props.reviews);
   const user = localStorage.getItem("username");
+
+  let existingReview;
+  const reviewFilter = props.reviews.filter(review => {
+    if (review.reviewer === user) {
+      existingReview = review.review;
+      return review;
+    }
+  });
 
   const [showModal, setShowModal] = useState(false);
 
   const openModal = useCallback(() => setShowModal(true), []);
   const closeModal = useCallback(() => setShowModal(false), []);
 
+  const deleteReview = useCallback(() => {
+    axiosAuth()
+      .delete(`/data/reviews/${reviewFilter[0].reviewid}`)
+      .then(() => {
+        closeModal();
+        props.setNewReview(!props.newReview);
+      })
+      .catch(err => console.error(err));
+  });
+
   if (!user) {
     return <p>You must be logged in to submit a review.</p>;
   }
 
-  const reviewFilter = props.reviews.filter(review => review.reviewer === user);
-
-  console.log(reviewFilter);
-
   return (
     <>
-      <button onClick={openModal}>Review</button>
+      {existingReview ? (
+        <button onClick={openModal}>Edit Review</button>
+      ) : (
+        <button onClick={openModal}>Review</button>
+      )}
       <ReactModal
         isOpen={showModal}
         contentLabel="Add Review"
         onRequestClose={closeModal}
       >
-        {/* <Form>
-          <Field
-            component="textarea"
-            name="review"
-            placeholder="Review"
-            value={values.review}
-          />
-          {touched.review && errors.review && <p>{errors.review}</p>}
-          <button onClick={closeModal}>Cancel</button>
-          <button type="submit">Submit Review</button>
-        </Form> */}
         <Formik
           initialValues={{
             username: user || null,
-            review: reviewFilter[0].review || ""
+            review: existingReview || ""
           }}
           validationSchema={Yup.object().shape({
             review: Yup.string().required("Review can't be empty")
@@ -54,10 +60,8 @@ const ReviewForm = props => {
               props.history.push("/login");
             }
 
-            if (reviewFilter.length > 0) {
-              axiosAuth()
-                .delete(`/data/reviews/${reviewFilter[0].reviewid}`)
-                .catch(err => console.error(err));
+            if (existingReview) {
+              deleteReview();
             }
 
             axiosAuth()
@@ -85,41 +89,21 @@ const ReviewForm = props => {
             {/* {touched.review && errors.review && <p>{errors.review}</p>} */}
             <button onClick={closeModal}>Cancel</button>
             <button type="submit">Submit Review</button>
+            {existingReview && (
+              <button
+                onClick={() => {
+                  deleteReview();
+                  closeModal();
+                }}
+              >
+                Delete Review
+              </button>
+            )}
           </Form>
         </Formik>
       </ReactModal>
     </>
   );
 };
-
-// const FormikReviewForm = withFormik({
-//   mapPropsToValues({ review }) {
-//     return {
-//       username: localStorage.getItem("username") || null,
-//       review: review || ""
-//     };
-//   },
-
-//   validationSchema: Yup.object().shape({
-//     review: Yup.string().required("Review can't be empty")
-//   }),
-
-//   handleSubmit({ username, review }, { props }) {
-//     axiosAuth()
-//       .post(`/review/book/${props.match.params.id}`, {
-//         reviewer: username,
-//         review: review
-//       })
-//       .then(() => {
-//         props.setNewReview(!props.newReview);
-//       })
-//       .catch(err => {
-//         console.error(err);
-//         props.history.push("/login");
-//       });
-//   }
-// })(ReviewForm);
-
-// export default FormikReviewForm;
 
 export default ReviewForm;
