@@ -1,5 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const StyledBook = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 1em;
+  background-color: #f2f2e2;
+  margin: 1em;
+  border-radius: 10px;
+  p {
+    padding: 0.2em;
+  }
+`;
+
+const BookHeader = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  img {
+    margin: 0.5em;
+  }
+`;
 
 const bookToIsbn = {
   Macroeconomics: "0538880457",
@@ -21,17 +47,21 @@ const bookToIsbn = {
 
 const Book = props => {
   return (
-    <div>
-      <img
-        src={`http://covers.openlibrary.org/b/isbn/${
-          bookToIsbn[props.title]
-        }-M.jpg`}
-      />
-      <Link to={`/book/${props.bookid}`}>Title: {props.title}</Link>
-      <p>Author(s): {props.author}</p>
-      <p>Publisher: {props.publisher}</p>
-      <p>License: {props.license}</p>
-      <p>Reviews: {props.reviews.length}</p>
+    <StyledBook>
+      <Link to={`/book/${props.bookid}`}>
+        <BookHeader>
+          <img
+            src={`http://covers.openlibrary.org/b/isbn/${
+              bookToIsbn[props.title]
+            }-M.jpg`}
+          />
+          <p>{props.title}</p>
+        </BookHeader>
+        <p>Author(s): {props.author}</p>
+        <p>Publisher: {props.publisher}</p>
+        <p>License: {props.license}</p>
+        <p>Reviews: {props.reviews.length}</p>
+      </Link>
       <p>
         <span>{`Read Now: `}</span>
         <a
@@ -41,7 +71,7 @@ const Book = props => {
           openlibrary.org
         </a>
       </p>
-    </div>
+    </StyledBook>
   );
 };
 
