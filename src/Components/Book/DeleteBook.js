@@ -1,8 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import ReactModal from "react-modal";
+import styled from "styled-components";
 
 import axiosAuth from "../../utils/auth";
+
+const StyledDeleteButton = styled.button`
+  background-color: #ff9999;
+`;
 
 const DeleteBook = props => {
   const { id } = useParams();
@@ -37,7 +42,9 @@ const DeleteBook = props => {
 
   return (
     <div>
-      <button onClick={openModalConfirm}>Delete Book</button>
+      <StyledDeleteButton onClick={openModalConfirm}>
+        Delete Book
+      </StyledDeleteButton>
       <ReactModal
         isOpen={showModalConfirm}
         contentLabel="Delete Book"

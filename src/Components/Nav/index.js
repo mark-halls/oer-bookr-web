@@ -12,6 +12,7 @@ const Nav = styled.nav`
   font-size: 3rem;
   background-color: #fcddbc;
   padding: 1em 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 `;
 
 const NavBar = props => {
