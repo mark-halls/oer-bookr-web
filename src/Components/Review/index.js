@@ -6,6 +6,8 @@ const StyledReviewCard = styled.div`
   padding: 1em;
   background-color: #f2f2e2;
   border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
 
   div {
     display: flex;

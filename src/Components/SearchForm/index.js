@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Search = styled.section`
+  margin-top: 0.25em;
   font-size: 3rem;
+  max-width: 700px;
+  width: 90%;
+  height: 1.5em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   input {
     width: 100%;

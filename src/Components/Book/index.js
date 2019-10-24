@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { device } from "../../Styles/device";
+
 const StyledBook = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -11,9 +13,11 @@ const StyledBook = styled.div`
   margin: 1em;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  max-width: 500px;
+  width: 80%;
 
-  p {
-    padding: 0.2em;
+  @media ${device.tablet} {
+    height: 28em;
   }
 `;
 
@@ -29,17 +33,21 @@ const BookHeader = styled.div`
   }
 `;
 
+const BookTitle = styled.p`
+  font-weight: 600;
+`;
+
 const bookToIsbn = {
   Macroeconomics: "0538880457",
   Precalculus: "0673158721",
   "Electromagnetism, 2E": "0471927120",
   Engineering: "0023071303",
-  "Linear algebra": "0201526751",
+  "Linear Algebra": "0201526751",
   "The American Pageant": "0618247327",
   Thermodynamics: "0070683050",
   Microeconomics: "0471457698",
   Calculus: "0534936245",
-  "Applied calculus": "0534419585",
+  "Applied Calculus": "0534419585",
   "Calculus: A Modeling Approach": "0201122162",
   "Chemistry: The Molecular Nature of Matter and Change": "0697396002",
   "Psychology: Themes and Variations": "0495093033",
@@ -57,7 +65,7 @@ const Book = props => {
               bookToIsbn[props.title]
             }-M.jpg`}
           />
-          <p>{props.title}</p>
+          <BookTitle>{props.title}</BookTitle>
         </BookHeader>
         <p>Author(s): {props.author}</p>
         <p>Publisher: {props.publisher}</p>

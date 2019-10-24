@@ -25,6 +25,12 @@ html {
 
   a {
     color: #222222;
+    
+    &:hover {
+      text-decoration: none;
+      color: #222222;
+
+    }
   }
 
   button {
