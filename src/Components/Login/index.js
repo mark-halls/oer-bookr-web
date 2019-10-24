@@ -2,10 +2,29 @@ import React from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
+
+const StyledForm = styled(Form)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  width: 100%;
+
+  input {
+    padding: 0.75em 0;
+    margin: 0.75em 0;
+    width: 80%;
+  }
+
+  button {
+    width: 12em;
+  }
+`;
 
 const Login = ({ values, touched, errors }) => {
   return (
-    <Form>
+    <StyledForm>
       <Field
         type="text"
         name="username"
@@ -21,7 +40,7 @@ const Login = ({ values, touched, errors }) => {
       />
       {touched.password && errors.password && <p>{errors.password}</p>}
       <button type="submit">Login</button>
-    </Form>
+    </StyledForm>
   );
 };
 

@@ -1,9 +1,33 @@
 import React, { useState, useCallback } from "react";
 import { Formik, Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import ReactModal from "react-modal";
+import styled from "styled-components";
 
 import axiosAuth from "../../utils/auth";
+import { StyledModal, CustomStyles } from "../../Styles/StyledModal";
+
+const StyledTextArea = styled(Field)`
+  width: 100%;
+  height: 10em;
+`;
+
+const StyledDeleteButton = styled.button`
+  background-color: #ff9999;
+`;
+
+const StyledSubmitButton = styled.button`
+  background-color: #99ffaf;
+`;
+
+const StyledButtonDiv = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+
+  button {
+    margin-top: 0.5em;
+  }
+`;
 
 const ReviewForm = props => {
   const user = localStorage.getItem("username");
@@ -42,10 +66,11 @@ const ReviewForm = props => {
       ) : (
         <button onClick={openModal}>Review</button>
       )}
-      <ReactModal
+      <StyledModal
         isOpen={showModal}
         contentLabel="Add Review"
         onRequestClose={closeModal}
+        style={CustomStyles}
       >
         <Formik
           initialValues={{
@@ -80,28 +105,32 @@ const ReviewForm = props => {
           }}
         >
           <Form>
-            <Field
+            <StyledTextArea
               component="textarea"
               name="review"
               placeholder="Review"
               // value={values.review}
             />
             {/* {touched.review && errors.review && <p>{errors.review}</p>} */}
-            <button onClick={closeModal}>Cancel</button>
-            <button type="submit">Submit Review</button>
-            {existingReview && (
-              <button
-                onClick={() => {
-                  deleteReview();
-                  closeModal();
-                }}
-              >
-                Delete Review
-              </button>
-            )}
+            <StyledButtonDiv>
+              <button onClick={closeModal}>Cancel</button>
+              {existingReview && (
+                <StyledDeleteButton
+                  onClick={() => {
+                    deleteReview();
+                    closeModal();
+                  }}
+                >
+                  Delete Review
+                </StyledDeleteButton>
+              )}
+              <StyledSubmitButton type="submit">
+                Submit Review
+              </StyledSubmitButton>
+            </StyledButtonDiv>
           </Form>
         </Formik>
-      </ReactModal>
+      </StyledModal>
     </>
   );
 };

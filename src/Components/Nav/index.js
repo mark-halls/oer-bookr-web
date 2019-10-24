@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "reactstrap";
+import styled from "styled-components";
+
+const Nav = styled.nav`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  font-size: 3rem;
+  background-color: #fcddbc;
+  padding: 1em 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+`;
 
 const NavBar = props => {
   const [loggedIn, setLoggedIn] = useState();
@@ -10,44 +23,26 @@ const NavBar = props => {
   }, [props.token]);
 
   return (
-    <Navbar color="light" light expand="md">
-      <Nav className="ml-auto" navbar>
-        <NavItem>
-          <NavLink to="/" className="nav-link" activeClassName="active">
-            Home
-          </NavLink>
-        </NavItem>
+    <Nav>
+      <NavLink to="/" className="nav-link" activeClassName="active">
+        <img src="/images/logo-cropped.png" alt-text="Home page" />
+      </NavLink>
 
-        {loggedIn ? (
-          <NavItem>
-            <NavLink to="/logout" className="nav-link" activeClassName="active">
-              Logout
-            </NavLink>
-          </NavItem>
-        ) : (
-          <>
-            <NavItem>
-              <NavLink
-                to="/signup"
-                className="nav-link"
-                activeClassName="active"
-              >
-                Signup
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                to="/login"
-                className="nav-link"
-                activeClassName="active"
-              >
-                Login
-              </NavLink>
-            </NavItem>
-          </>
-        )}
-      </Nav>
-    </Navbar>
+      {loggedIn ? (
+        <NavLink to="/logout" className="nav-link" activeClassName="active">
+          Logout
+        </NavLink>
+      ) : (
+        <>
+          <NavLink to="/signup" className="nav-link" activeClassName="active">
+            Signup
+          </NavLink>
+          <NavLink to="/login" className="nav-link" activeClassName="active">
+            Login
+          </NavLink>
+        </>
+      )}
+    </Nav>
   );
 };
 
