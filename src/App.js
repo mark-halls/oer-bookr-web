@@ -16,7 +16,7 @@ html {
 }
 
   body {
-    @import url('https://fonts.googleapis.com/css?family=Crimson+Text&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,400i&display=swap');
     font-family: 'Crimson Text', serif;
     color: #222222;
     background-color: #ffffef;
