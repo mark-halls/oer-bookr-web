@@ -1,4 +1,17 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const Search = styled.section`
+  font-size: 3rem;
+
+  input {
+    width: 100%;
+    padding: 0;
+    border-width: 0px;
+    border: none;
+    height: 100%;
+  }
+`;
 
 export default function SearchForm(props) {
   const setSearchResults = props.setDataToDisplay;
@@ -16,8 +29,8 @@ export default function SearchForm(props) {
   }, [searchTerm, setSearchResults, dataToSearch]);
 
   return (
-    <section className="search-form">
+    <Search className="search-form">
       <input placeholder="Search" value={searchTerm} onChange={handleChange} />
-    </section>
+    </Search>
   );
 }
