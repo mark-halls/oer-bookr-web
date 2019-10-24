@@ -11,6 +11,7 @@ const Nav = styled.nav`
   text-decoration: none;
   font-size: 3rem;
   background-color: #fcddbc;
+  padding: 1em 0;
 `;
 
 const NavBar = props => {
@@ -23,7 +24,7 @@ const NavBar = props => {
   return (
     <Nav>
       <NavLink to="/" className="nav-link" activeClassName="active">
-        <img src="/images/logo.png" alt-text="Home page" />
+        <img src="/images/logo-cropped.png" alt-text="Home page" />
       </NavLink>
 
       {loggedIn ? (
