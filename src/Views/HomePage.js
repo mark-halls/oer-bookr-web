@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import axiosAuth from "../utils/auth";
-
 import Book from "../Components/Book";
 import SearchForm from "../Components/SearchForm";
+
+const StyledPage = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledBookList = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  &:div {
+    height: 30em;
+  }
+`;
 
 const HomePage = props => {
   const [bookList, setBookList] = useState();
@@ -31,14 +49,14 @@ const HomePage = props => {
   }
 
   return (
-    <div>
+    <StyledPage>
       <SearchForm data={bookList} setDataToDisplay={setDataToDisplay} />
-      <div>
+      <StyledBookList>
         {dataToDisplay.map(book => (
           <Book {...book} key={book.bookid} />
         ))}
-      </div>
-    </div>
+      </StyledBookList>
+    </StyledPage>
   );
 };
 

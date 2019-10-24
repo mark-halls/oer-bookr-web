@@ -9,13 +9,30 @@ import Book from "../Components/Book";
 import Review from "../Components/Review";
 import ReviewForm from "../Components/Review/ReviewForm";
 import DeleteBook from "../Components/Book/DeleteBook";
+import { device } from "../Styles/device";
 
 ReactModal.setAppElement("#root");
+
+const Page = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .book {
+    height: 40rem;
+  }
+`;
 
 const StyledButtonDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1em;
+  width: 80%;
+
+  @media ${device.tablet} {
+    max-width: 600px;
+  }
 `;
 
 const BookPage = props => {
@@ -37,7 +54,7 @@ const BookPage = props => {
   }, [id, newReview, props.history]);
 
   return (
-    <div>
+    <Page>
       {book && <Book {...book} {...props} />}
       <StyledButtonDiv>
         <DeleteBook {...props} />
@@ -55,7 +72,7 @@ const BookPage = props => {
       ) : (
         <p></p>
       )}
-    </div>
+    </Page>
   );
 };
 
