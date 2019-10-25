@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
 
+import { device } from "../../Styles/device";
+
 const StyledForm = styled(Form)`
   display: flex;
   justify-content: center;
@@ -15,6 +17,10 @@ const StyledForm = styled(Form)`
     padding: 0.75em 0;
     margin: 0.75em 0;
     width: 80%;
+
+    @media ${device.tablet} {
+      width: 400px;
+    }
   }
 
   button {
